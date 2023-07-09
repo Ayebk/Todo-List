@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Todo List</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="p-3" style="background-color: #fef9ef">
+      <h1 class="text-center">Todo List</h1>
+      <div class="p-5">
+        <h5>Add Todo</h5>
+        <form class="pb-2">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Add new todo"
+              aria-label="Add new todo"
+              aria-describedby="basic-addon2"
+            />
+          </div>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </form>
+        <ul class="list-group p-50"></ul>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        $(".btn-primary").click(function () {
+          var input = $(".form-control").val();
+          if (input != "") {
+            $(".list-group").append(
+              '<li class="list-group-item h-150 d-flex justify-content-between align-items-center">' +
+                input +
+                '<div> <button class="btn btn-outline-success m-1"><i class="bi bi-check2"></i></button><button class="btn btn-outline-danger"><i class="bi bi-x"></i></button></div></li>'
+            );
+            $(".form-control").val("");
+          }
+        });
+        $("ul").on("click", ".btn-outline-danger", function () {
+          $(this).closest("li").remove();
+        });
+        $("ul").on("click", ".btn-outline-success", function () {
+          if ($(this).closest("li").css("text-decoration-line") == "none")
+            $(this).closest("li").css("text-decoration-line", "line-through");
+          else $(this).closest("li").css("text-decoration-line", "none");
+        });
+      });
+    </script>
+  </body>
+</html>
